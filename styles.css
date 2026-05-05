@@ -130,6 +130,7 @@ img {
   line-height: 1.05;
 }
 
+
 .brand-copy strong {
   font-size: 0.95rem;
 }
@@ -437,6 +438,23 @@ img {
   box-shadow: var(--shadow);
 }
 
+.hero-note {
+  width: 100%;
+  max-width: 260px;
+}
+
+.hero-fund {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  max-width: 260px;
+  min-height: 170px;
+  padding: 1.2rem 1.2rem 1.3rem;
+}
+
 .hero-note span,
 .hero-fund span {
   display: inline-block;
@@ -451,6 +469,7 @@ img {
   font-size: clamp(1.9rem, 11vw, 3rem);
   line-height: 1;
   color: var(--orange);
+  margin-top: 0.85rem;
 }
 
 .social-rail {
@@ -1011,6 +1030,22 @@ img {
   .hero-side {
     order: 3;
     justify-items: end;
+  }
+
+  .hero-note {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .hero-fund {
+    width: 100%;
+    max-width: 300px;
+    min-height: 194px;
+    padding: 1.4rem 1.4rem 1.5rem;
+  }
+
+  .hero-fund strong {
+    font-size: clamp(2.8rem, 4vw, 4.5rem);
   }
 
   .hero-intro h1 {
