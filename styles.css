@@ -450,6 +450,22 @@ img {
   box-shadow: var(--shadow);
 }
 
+.hero-note {
+  width: 100%;
+  max-width: 300px;
+}
+
+.hero-fund {
+  width: 100%;
+  max-width: 300px;
+  min-height: 194px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
 .hero-note span,
 .hero-fund span {
   display: inline-block;
@@ -461,9 +477,10 @@ img {
 
 .hero-fund strong {
   display: block;
-  font-size: clamp(1.9rem, 11vw, 3rem);
+  font-size: clamp(2.8rem, 14vw, 4.8rem);
   line-height: 1;
   color: var(--orange);
+  margin-top: 0.85rem;
 }
 
 .social-rail {
