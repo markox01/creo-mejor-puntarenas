@@ -10,6 +10,9 @@ export default async function handler(req, res) {
   }
 
   const apiKey = process.env.OPENAI_API_KEY;
+  const baseUrl = (process.env.BASE_URL || "https://api.deepseek.com/v1").replace(/\/$/, "");
+  const modelName = process.env.MODEL_NAME || "deepseek-chat";
+
   if (!apiKey) {
     res.status(500).json({
       error: "OPENAI_API_KEY no está configurada en el hosting."
@@ -33,15 +36,15 @@ export default async function handler(req, res) {
   ].join(" ");
 
   try {
-    const response = await fetch("https://api.openai.com/v1/responses", {
+    const response = await fetch(`${baseUrl}/chat/completions`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${apiKey}`
       },
       body: JSON.stringify({
-        model: "gpt-5",
-        input: [
+        model: modelName,
+        messages: [
           {
             role: "system",
             content: systemPrompt
@@ -50,7 +53,8 @@ export default async function handler(req, res) {
             role: "user",
             content: message
           }
-        ]
+        ],
+        temperature: 0.7
       })
     });
 
@@ -63,7 +67,7 @@ export default async function handler(req, res) {
       return;
     }
 
-    const outputText = data.output_text || "";
+    const outputText = data?.choices?.[0]?.message?.content || "";
 
     res.status(200).json({
       reply: outputText || "No pude generar una respuesta en este momento."
