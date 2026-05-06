@@ -208,6 +208,13 @@ searchInput?.addEventListener("input", filterProposals);
 
 const form = document.querySelector("#volunteer-form");
 const statusNode = document.querySelector("#form-status");
+const chatbotRoot = document.querySelector("[data-chatbot]");
+const chatbotToggle = document.querySelector(".chatbot-toggle");
+const chatbotPanel = document.querySelector(".chatbot-panel");
+const chatbotClose = document.querySelector(".chatbot-close");
+const chatbotForm = document.querySelector("#chatbot-form");
+const chatbotInput = document.querySelector("#chatbot-input");
+const chatbotMessages = document.querySelector("#chatbot-messages");
 
 const validators = {
   name: (value) => value.trim().length >= 4,
@@ -254,4 +261,78 @@ form?.addEventListener("submit", (event) => {
 
   statusNode.textContent = "Formulario listo para integrarse con tu CRM o CMS. Los datos pasaron la validación.";
   form.reset();
+});
+
+const appendChatMessage = (role, text) => {
+  if (!chatbotMessages) {
+    return;
+  }
+
+  const item = document.createElement("article");
+  item.className = `chatbot-message ${role}`;
+
+  const paragraph = document.createElement("p");
+  paragraph.textContent = text;
+
+  item.appendChild(paragraph);
+  chatbotMessages.appendChild(item);
+  chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+};
+
+const setChatbotOpen = (isOpen) => {
+  if (!chatbotPanel || !chatbotToggle) {
+    return;
+  }
+
+  chatbotPanel.hidden = !isOpen;
+  chatbotToggle.setAttribute("aria-expanded", String(isOpen));
+};
+
+chatbotToggle?.addEventListener("click", () => {
+  const isOpen = chatbotToggle.getAttribute("aria-expanded") === "true";
+  setChatbotOpen(!isOpen);
+});
+
+chatbotClose?.addEventListener("click", () => {
+  setChatbotOpen(false);
+});
+
+chatbotForm?.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  if (!chatbotInput) {
+    return;
+  }
+
+  const message = chatbotInput.value.trim();
+  if (!message) {
+    return;
+  }
+
+  appendChatMessage("user", message);
+  chatbotInput.value = "";
+  chatbotInput.disabled = true;
+
+  try {
+    const response = await fetch("/api/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ message })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      appendChatMessage("bot", data?.error || "No pude responder en este momento.");
+    } else {
+      appendChatMessage("bot", data.reply || "No pude responder en este momento.");
+    }
+  } catch (error) {
+    appendChatMessage("bot", "No fue posible conectar con el asistente ahora mismo.");
+  } finally {
+    chatbotInput.disabled = false;
+    chatbotInput.focus();
+  }
 });
