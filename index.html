@@ -121,7 +121,7 @@
       <div class="container spotlight-grid">
         <div class="spotlight-copy">
           <p class="eyebrow">Misión y visión</p>
-          <h2>Liderazgo en el que la gente puede confiar.</h2>
+          <h2>Devolvamosle la dignidad a los puntarenenses.</h2>
           <p><strong>Misión:</strong> trabajar con mucho esfuerzo, compromiso y conocimiento los ejes fundamentales de una gestión municipal eficiente y productiva para la evolución de nuestro cantón número uno de nuestra provincia.</p>
           <p><strong>Visión:</strong> llegar a la alcaldía, vice alcaldía, regidurías y sindicaturas a transformar nuestro cantón en una de la ciudades más modernas, educadas, productivas, limpias, sostenibles, turísticas y dinamizadas de toda Latinoamérica.</p>
           <a class="button accent" href="#transparencia">Conocer estatutos y valores</a>
@@ -137,7 +137,7 @@
 
     <section id="propuestas" class="section dark-stage blueprint-section">
       <div class="container">
-        <div class="section-heading narrow">
+        <div class="section-heading narrow transparency-heading">
           <p class="eyebrow">Plan de gobierno</p>
           <h2>Una hoja de ruta moderna para un Puntarenas con futuro.</h2>
         </div>
@@ -167,7 +167,7 @@
             <span class="proposal-tag">Cultura</span>
             <h3>Socio Cultural & Artístico </h3>
             <p>Valorar la identidad del artista puntarenense con producciones culturales autóctonas y originales que representen nuestra historia desde nuestros antepasados hasta la sociedad porteña actual</p>
-            <a class="text-link" target="_blank" rel="noopener noreferrer" href="./Propuestas/Plan de Gobierno Socio Cultural - Yo creo una mejor Puntarenas 3.pdf">Ver Propuesta de Campaña (PDF)</a>
+            <a class="text-link" target="_blank" rel="noopener noreferrer" href="Plan de Gobierno Socio Cultural - Yo creo una mejor Puntarenas 3.pdf">Ver Propuesta de Campaña (PDF)</a>
           </article>
           <article class="proposal-card cut-card white-card" data-category="salud" data-keywords="salud bienestar clinicas prevencion adultos mayores">
             <span class="proposal-tag">Salud</span>
@@ -187,9 +187,13 @@
 
     <section id="transparencia" class="section faq-stage">
       <div class="container faq-shell">
-        <div class="section-heading narrow">
+        <div class="section-heading transparency-heading">
           <p class="eyebrow">Transparencia</p>
-          <h2>Guía práctica para entender cómo gobernamos y cómo rendimos cuentas.</h2>
+          <h2>
+            <span class="heading-line">Guía práctica para entender</span>
+            <span class="heading-line">cómo gobernamos y</span>
+            <span class="heading-line">cómo rendimos cuentas.</span>
+          </h2>
         </div>
 
         <div class="faq-list">
@@ -385,6 +389,34 @@
       </div>
     </div>
   </footer>
+
+  <div class="chatbot-shell" data-chatbot>
+    <button class="chatbot-toggle" type="button" aria-expanded="false" aria-controls="chatbot-panel">
+      Asistente IA
+    </button>
+
+    <section id="chatbot-panel" class="chatbot-panel" aria-label="Asistente virtual de campaña" hidden>
+      <div class="chatbot-header">
+        <div>
+          <strong>Asistente virtual</strong>
+          <p>Resuelve dudas sobre campaña, propuestas y contacto.</p>
+        </div>
+        <button class="chatbot-close" type="button" aria-label="Cerrar chat">×</button>
+      </div>
+
+      <div class="chatbot-messages" id="chatbot-messages" aria-live="polite">
+        <article class="chatbot-message bot">
+          <p>Hola, soy el asistente virtual de la campaña. Puedo ayudarte con misión, visión, propuestas, voluntariado, transparencia y redes sociales.</p>
+        </article>
+      </div>
+
+      <form class="chatbot-form" id="chatbot-form">
+        <label class="sr-only" for="chatbot-input">Escribe tu pregunta</label>
+        <textarea id="chatbot-input" name="message" rows="3" placeholder="Escribe tu pregunta aquí..." required></textarea>
+        <button class="button primary full" type="submit">Enviar</button>
+      </form>
+    </section>
+  </div>
 
   <script src="./app.js"></script>
 </body>
