@@ -172,12 +172,18 @@ let activeFilter = "all";
 const visitCounter = document.querySelector("#visit-counter");
 
 if (visitCounter) {
-  const storageKey = "site-visit-count";
-  const currentValue = Number.parseInt(window.localStorage.getItem(storageKey) || "0", 10);
-  const nextValue = Number.isNaN(currentValue) ? 1 : currentValue + 1;
-
-  window.localStorage.setItem(storageKey, String(nextValue));
-  visitCounter.textContent = nextValue.toLocaleString("es-CR");
+  fetch("/api/visits", {
+    method: "POST"
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (typeof data?.count === "number") {
+        visitCounter.textContent = data.count.toLocaleString("es-CR");
+      }
+    })
+    .catch(() => {
+      visitCounter.textContent = "0";
+    });
 }
 
 const filterProposals = () => {
